@@ -1,0 +1,52 @@
+<!-- Navbar Start -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="banner">
+    <div class="container">
+
+        <div class="navbar-header">
+
+            <!-- Telefon ekranları için menü butonu -->
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- İsim Soyisim veya Marka İsmi -->
+            <a href="{% url 'home' %}" class="navbar-brand">MY BLOG NOW</a>
+        </div>
+
+        <nav class="collapse navbar-collapse" role="navigation">
+
+            <!-- Arama Çubuğu -->
+            <form class="navbar-form navbar-left" role="search" method="GET" action="">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="q" placeholder="Search on blog" value="{{ request.GET.q }} {# kullanıcının arama cubugunda ne aradıgını görmesi için#}" >
+                    <span class="input-group-btn">                                                                           {#  Get methodu isteği içerisinden q değerini çektik  #}
+                        <input class="btn btn-default" type="submit" value="Search">
+                    </span>
+                </div>
+            </form>
+
+            <!-- Temel Sayfalar -->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="navbar-brand" href="{% url 'home' %}">Homepage</a></li>
+                {% if request.user.is_authenticated %}
+                    <li><a class="navbar-brand" href="{% url 'post:create' %}">Create Post</a></li>
+                {% endif%}
+                <li><a class="navbar-brand" href="{% url 'post:index' %}">Blog</a></li>
+                {% if user.is_authenticated %}
+                    <ul class="pull-right"><li><a class="navbar-brand btn-danger pull-right" href="{% url 'logout' %}">Logout</a></li></ul>
+                    <ul class="pull-right"><li><a class="navbar-brand" href="{% url 'profile' %}">Profile</a></li></ul>
+
+                {% else %}
+                    <ul class="pull-right"><li><a class="navbar-brand " href="{% url 'login' %}">Login</a></li></ul>
+                    <ul class="pull-right
+"><li><a class="navbar-brand " href="{% url 'register' %}">Register</a></li></ul>
+                {% endif %}
+            </ul>
+
+        </nav>
+
+    </div>
+</nav>
